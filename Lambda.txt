@@ -1,0 +1,92 @@
+'use strict'
+const AWS = require('aws-sdk');
+
+AWS.config.update({ region: "us-east-1"});
+
+exports.handler = async (event, context) => {
+  const ddb = new AWS.DynamoDB({ apiVersion: "2012-10-08"});
+  const documentClient = new AWS.DynamoDB.DocumentClient({ region: "us-east-1"});
+
+  let responseBody = "";
+  let statusCode = 0;
+
+  const { id } = event.pathParameters;
+
+  const params = {
+    TableName: "Resume_Kitty",
+    Key: {
+      id: id
+    }
+  }
+
+  try {
+    const data = await documentClient.get(params).promise();
+    responseBody = JSON.stringify(data.Item);
+    statusCode = 200;
+  } catch (err) {
+    responseBody = `Unable to get user data`;
+    statusCode = 403;
+  }
+
+  const response = {
+    statusCode: statusCode,
+    headers: {
+      "myHeader": "test",
+    
+            "Access-Control-Allow-Headers" : "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE"
+    },
+    body: responseBody
+  }
+
+  return response;
+}
+
+
+
+
+'use strict'
+const AWS = require('aws-sdk');
+
+AWS.config.update({ region: "us-east-1"});
+
+exports.handler = async (event, context) => {
+  const ddb = new AWS.DynamoDB({ apiVersion: "2012-10-08"});
+  const documentClient = new AWS.DynamoDB.DocumentClient({ region: "us-east-1"});
+
+  let responseBody = "";
+  let statusCode = 0;
+
+  const { id, hitcount } = JSON.parse(event.body);
+
+  const params = {
+    TableName: "Resume_Kitty",
+    Item: {
+      id: id,
+      hitcount: hitcount
+    }
+  }
+
+  try {
+    const data = await documentClient.put(params).promise();
+    responseBody = JSON.stringify(data);
+    statusCode = 201;
+  } catch (err) {
+    responseBody = `Unable to put user data`;
+    statusCode = 403;
+  }
+
+  const response = {
+    statusCode: statusCode,
+    headers: {
+      "myHeader": "test",
+            "Access-Control-Allow-Headers" : "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE"
+    },
+    body: responseBody
+  }
+
+  return response;
+}
