@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<!-- saved from url=(0116)https://resume.io/ -->
+<!DOCTYPE html PUBLIC "" ""><HTML lang="en">
+<HEAD>
+<META content="IE=11.0000" http-equiv="X-UA-Compatible">
+
+<META charset="UTF-8"> <TITLE>My resume</TITLE> 
+
+
+ <LINK href="style.css" 
+rel="stylesheet" media="all" data-critical="true">
+
+<SCRIPT src="script.js" defer="defer"></SCRIPT>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+var maxCountnumber=0;
+
+function callAPI() {
+
+  $.ajax({
+
+     url: "https://cc33q6x6zf.execute-api.us-east-1.amazonaws.com/DEV/resume/maxnumber",
+    type: "GET",
+    async: false,
+    success: function(result) {
+      //console.log(result);
+      maxCountnumber =result.hitcount + 1;
+      //alert(maxCountnumber);
+    },
+    error: function(error) {
+      console.log(error);
+      //alert("NOT"+error);
+    }
+  });
+
+  //alert(maxCountnumber);
+
+  var countnumbers = {
+    "id":"maxnumber",
+    "hitcount": maxCountnumber
+    };
+
+   // alert("update with: "+maxCountnumber);
+
+  $.ajax({
+    
+    url: "https://cc33q6x6zf.execute-api.us-east-1.amazonaws.com/DEV/resume",
+    type: "POST",
+    crossDomain: "true",
+    contentType: "application/json; charset=utf-8",
+    data: JSON.stringify(countnumbers),
+    success: function(result) {
+    //console.log(result);
+    var e=document.getElementById('website-counter-DB');
+    e.innerHTML=maxCountnumber;
+      //alert("Save OK - "+maxCountnumber);
+    },
+    error: function(error) {
+    //console.log(error);
+    alert("Save error");
+    }
+    });
+
+   };
+
+</script>
+
+
+<META name="GENERATOR" content="MSHTML 11.00.10570.1001"></HEAD>
+<BODY onload='callAPI()'>
+<DIV class="container">
+<DIV class="home" data-locale="en">
+
+
+<DIV class="showcase section">
+<DIV class="showcase__container grid-container">
+
+
+<DIV class="home-resume-maker section">
+<DIV class="grid-container">
+
+
+<DIV class="home-letter-maker section">
+<DIV class="grid-container">
+<DIV class="home-letter-maker__main">
+<DIV class="home-letter-maker__content">
+<H2 class="home-letter-maker__title section__title">Kitty's Cloud Resume Challenge</H2>
+<DIV class="home-letter-maker__description">
+ Website visit count:
+    <div id="website-counter-DB" class="website-counter"></div>
+
+
+
+</DIV></DIV>
+<DIV class="home-letter-maker__visual" data-lazy-bg="test_pic.png"></DIV>
+</DIV></DIV></DIV>
+
+
+<DIV class="home-how section">
+<DIV class="grid-container">
+
+<DIV class="home-how__header">
+<DIV class="home-how__icon" data-lazy-bg="https://resume.io/assets/landing/home/how/icon-ac2fba6949597d7b9c602cd87664c2511b2a97eb90acc2a81abdeda61f16c591.svg"></DIV>
+</DIV>
+
+<DIV class="home-how__content">
+
+<DIV class="home-how__tabs">
+<DIV class="home-how__tab">Profile
+<DIV class="home-how__tab-bar">
+<DIV class="home-how__tab-bar-progress"></DIV></DIV></DIV>
+<DIV class="home-how__tab">Employment History
+<DIV class="home-how__tab-bar">
+<DIV class="home-how__tab-bar-progress"></DIV></DIV></DIV>
+<DIV class="home-how__tab">Education
+<DIV class="home-how__tab-bar">
+<DIV class="home-how__tab-bar-progress"></DIV></DIV></DIV>
+</DIV>
+
+
+<DIV class="home-how__panes">
+<DIV class="home-how__panes-list">
+
+<DIV class="home-how__pane" data-background="https://resume.io/assets/landing/home/how/sign_up-bf930bfe1e45333a17fb262a31bef7f36e085820806d64f82965ff0f73ebc413.svg">
+<DIV class="home-how__pane-title">IT Business integrator</DIV>
+<DIV class="home-how__pane-description">
+Experienced and professional IT Business integrator with over 10 years of valuable experience in monitoring project performance to ensure company success. Familiar and adept in working with supply chain, finance, manufacture operation, and ERP(SAP) system. Reputation for continually achieving on time and under-budget performance goals. Accustomed to handling IT support, managing IT projects, and supporting various departments with IT tool and applications. Bring forth motivated attitude and the ability to establish strong and productive relationships with team members.
+</DIV></DIV>
+
+<DIV class="home-how__pane" data-background="https://resume.io/assets/landing/home/how/create-885f73e3e1c7467963213e77195a1b637b07bf5cbd43e92f92fe1fe73d94afc3.svg">
+<DIV class="home-how__pane-title">07/2002-06/2004 Software developer</DIV>
+<DIV class="home-how__pane-description">Provided web application development support </DIV>
+<DIV class="home-how__pane-title">07/2004-06/2010 ERP support</DIV>
+<DIV class="home-how__pane-description">Provided full modules support for ERP system </DIV>
+<DIV class="home-how__pane-title">07/2010-04/2012 SAP Project</DIV>
+<DIV class="home-how__pane-description">Provided support for SAP implementation </DIV>
+</DIV>
+
+<DIV class="home-how__pane" data-background="https://resume.io/assets/landing/home/how/create-885f73e3e1c7467963213e77195a1b637b07bf5cbd43e92f92fe1fe73d94afc3.svg">
+<DIV class="home-how__pane-title">AAA University</DIV>
+<DIV class="home-how__pane-description">Master of Computer Science. CET-6, Advanced Software Developer </DIV>
+</DIV>
+
+
+</DIV>
+</DIV>
+
+
+
+ </BODY></HTML>
